@@ -63,3 +63,6 @@ Auto-save progress
 Auto-adjusts to month length
 
 Lightweight and beginner friendly
+
+<img width="272" height="197" alt="image" src="https://github.com/user-attachments/assets/4c5c6dac-9118-4e69-9438-e6c46b97c859" />
+
