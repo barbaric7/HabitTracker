@@ -5,6 +5,9 @@ function Initialize()
 end
 
 function UpdateGrid()
+    -- Safety check: if measures are missing, stop to prevent crash
+    if not MeasureYear or not MeasureMonth then return end
+
     local year = tonumber(MeasureYear:GetString())
     local month = tonumber(MeasureMonth:GetString())
     local daysInMonth = GetDaysInMonth(month, year)
@@ -38,7 +41,8 @@ function Toggle(dayIndex)
     if currentState == 0 then newState = 1 else newState = 0 end
 
     SKIN:Bang('!SetVariable', 'Day'..dayIndex, newState)
-    SKIN:Bang('!WriteKeyValue', 'Variables', 'Day'..dayIndex, newState, SKIN:GetVariable('CURRENTPATH')..'Variables.inc')
+    local fullPath = SKIN:GetVariable('CURRENTPATH') .. 'Variables.inc'
+    SKIN:Bang('!WriteKeyValue "Variables" "Day'..dayIndex..'" "'..newState..'" "'..fullPath..'"')
 
     if newState == 1 then
         SKIN:Bang('!SetOption', 'MeterDay'..dayIndex, 'MeterStyle', 'StyleDone')
